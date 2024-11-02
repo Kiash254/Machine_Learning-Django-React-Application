@@ -1,10 +1,13 @@
 import joblib
 import numpy as np
+import os
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
-# Load the saved model from disk
-model = joblib.load('model.pkl')
+# Load the saved model from disk using an absolute path
+model_path = os.path.join('model.pkl')
+model = joblib.load(model_path)
 
 @csrf_exempt
 def predict(request):

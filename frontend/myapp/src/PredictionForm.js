@@ -9,17 +9,15 @@ function PredictionForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Input validation
     if (!height || !weight) {
       setError('Please enter both height and weight.');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/predict/', {  // Update URL here
-        height,
-        weight,
+      const response = await axios.post('http://localhost:8000/api/predict/', {
+        height: parseFloat(height),
+        weight: parseFloat(weight),
       });
 
       setPrediction(response.data.prediction);
